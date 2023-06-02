@@ -22,7 +22,10 @@ public class Main {
                     cl -> new Node(cl.getName(), new ArrayList<>(),
                             this, thread));
             node.packages.clear();
-            node.packages.addAll(Arrays.stream(classLoader.getDefinedPackages()).map(Package::getName).sorted(Comparator.comparingInt(p -> p.split("\\.").length)).toList());
+            node.packages.addAll(Arrays.stream(classLoader.getDefinedPackages())
+                    .map(Package::getName)
+                    .sorted(Comparator.comparingInt(p -> p.split("\\.").length))
+                    .toList());
             return node;
         }
 
@@ -35,8 +38,8 @@ public class Main {
                 return;
             }
             ClassLoader classLoader = reversedClassLoaderChain.get(end - 1);
-            Node child = getChild(classLoader, thread);
-            child.add(reversedClassLoaderChain, null, end - 1);
+            Node child = getChild(classLoader, end == 1 ? thread : null);
+            child.add(reversedClassLoaderChain, thread, end - 1);
         }
 
         void print(int maxPackages, String indent) {
