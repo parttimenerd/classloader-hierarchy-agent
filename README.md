@@ -3,6 +3,11 @@ Classloader Hierarchy Agent
 
 An agent to print the classloader hierarchy of a running JVM (16+).
 
+To lear more on this topic, please consider reading the accompanying blog post
+[Class Loader Hierarchies](https://mostlynerdless.de/blog/2023/06/02/class-loader-hierarchies/).
+
+Now, we no further ado, let's look at how to use the agent for an example:
+
 ```sh
 # build it
 mvn package
